@@ -1,0 +1,70 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row mb-auto">
+    <div class="col-md-4">
+        <div class="row no-gutters border mb-4">
+            <div class="col p-4 mb-4 ">
+                <h4>Instruction</h4>
+                <p class="card-text">
+                    Beaverton University is a sample projet that
+                    is developed by Mr. Kefu Zhou. The prototype of
+                    the project is based on Razor Pages with Entity
+                    Framework Core in ASP.NET Core.
+                </p>
+                <p>
+                    The original sample has a set of rough funtions of Admin and the simple web layout
+                    This project adds the function set of Idenyity and Student. Also the lay out of
+                    all web pages are re-designed.
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row no-gutters border mb-4">
+            <div class="col p-4 d-flex flex-column position-static">
+                <p class="card-text mb-auto">
+                    <h4>Technologies</h4>
+                    <ol type="1">
+                        <li>IDE: Visual Studios 2022</li>
+                        <li>Database:  SQL Server 2019</li>
+                        <li>
+                            Program Language:<br />
+                            C#, SQL, HTML, CSS, JSP.
+                        </li>
+                        <Li>
+                            Tools: <br />
+                            RazorPage, SSMS, MS Identity, Bootstap,
+                            Edge DevTools,  Entity Framework Core.
+                            Code First & Database First.
+                        </Li>
+                    </ol>
+                    @* <a href="https://docs.microsoft.com/aspnet/core/data/ef-rp/intro" class="stretched-link">See the tutorial</a>
+                    *@
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row no-gutters border mb-4">
+            <div class="col p-4 d-flex flex-column">
+                <p class="card-text mb-auto">
+                    <h4>For Users </h4>
+                    Based on ASP.NET Core Identity Framework
+                    1. Register at the first time.<br />
+                    2. User name is with email. <br />
+                    3. Users are in Admin, Student and Teascher.<br />
+                    4. Please update profile.
+                </p>
+                <p>
+                    @*                    <a href="https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-rp/intro/samples" class="stretched-link">See project source code</a>
+                    *@
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
