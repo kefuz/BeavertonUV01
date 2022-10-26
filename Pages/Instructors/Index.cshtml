@@ -5,11 +5,24 @@
     ViewData["Title"] = "Instructors";
 }
 
-<h2>Instructors</h2>
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand text-black" href="#">Instructors |</a>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+        <! Add new item. >
+        <div class="collapse navbar-collapse" id="navAddNew">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="Create">
+                        <img src="~/icon/addsvg.svg" />
+                        <span class="text-decoration-underline">Add New</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <table class="table">
     <thead>
         <tr>
@@ -26,10 +39,12 @@
         @foreach (var item in Model.InstructorData.Instructors)
         {
             string selectedRow = "";
+
             if (item.ID == Model.InstructorID)
             {
                 selectedRow = "table-success";
             }
+
             <tr class="@selectedRow">
                 <td>
                     @Html.DisplayFor(modelItem => item.LastName)
@@ -50,15 +65,34 @@
                     @{
                         foreach (var course in item.Courses)
                         {
-                            @course.CourseID @:  @course.Title <br />
+                                @course.CourseID @:  @course.Title <br />
                         }
                     }
                 </td>
                 <td>
-                    <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-page="./Index" 
+                       asp-route-id="@item.ID"
+                       class="text-decoration-none">
+                          <img src="~/icon/selectsvg.svg" /> &nbsp
+                      </a> 
+                   
+                    <a asp-page="./Edit" 
+                       asp-route-id="@item.ID"
+                       class="text-decoration-none">
+                          <img src="~/icon/Editsvg.svg" /> &nbsp
+                    </a> 
+
+                    <a asp-page="./Details" 
+                       asp-route-id="@item.ID"
+                       class="text-decoration-none">
+                          <img src="~/icon/DetailSvg.svg" /> &nbsp
+                   </a> 
+
+                    <a asp-page="./Delete" 
+                       asp-route-id="@item.ID"
+                       class="text-decoration-none">
+                          <img src="~/icon/DeleteSvg.svg" /> &nbsp
+                    </a>
                 </td>
             </tr>
         }
@@ -85,7 +119,11 @@
             }
             <tr class="@selectedRow">
                 <td>
-                    <a asp-page="./Index" asp-route-courseID="@item.CourseID">Select</a>
+                    <a asp-page="./Index" 
+                       asp-route-courseID="@item.CourseID"
+                       class="text-decoration-none">
+                          <img src="~/icon/SelectSvg.svg" /> &nbsp
+                    </a>
                 </td>
                 <td>
                     @item.CourseID

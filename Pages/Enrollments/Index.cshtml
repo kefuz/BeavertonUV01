@@ -2,14 +2,27 @@
 @model BeavertonUV.Pages.Enrollments.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Enrollments";
 }
 
-<h1>Index</h1>
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand text-black" href="#">Enrollments |</a>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+        <! Add new item. >
+        <div class="collapse navbar-collapse" id="navAddNew">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="Create">
+                        <img src="~/icon/addsvg.svg" />
+                        <span class="text-decoration-underline">Add New</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <table class="table">
     <thead>
         <tr>
@@ -26,23 +39,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Enrollment) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Grade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.CourseID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.ID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.EnrollmentID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.EnrollmentID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.EnrollmentID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Enrollment)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.ID)
+                </td>
+
+                <td align="right">
+                    <a class="text-decoration-none"
+                   asp-page="./Edit" asp-route-id="@item.EnrollmentID ">
+                        <img src="~/icon/editsvg.svg" /> &nbsp
+                    </a>
+
+                    <a class="text-decoration-none"
+                   asp-page="./Details" asp-route-id="@item.EnrollmentID">
+                        <img src="~/icon/detailsvg.svg" /> &nbsp
+                    </a>
+
+                    <a asp-page="./Delete" asp-route-id="@item.EnrollmentID">
+                        <img src="~/icon/deletesvg.svg" />
+                    </a>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

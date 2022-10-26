@@ -5,29 +5,56 @@
     ViewData["Title"] = "Students";
 }
 
-<h2>Students</h2>
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand text-black" href="#">Students |</a>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+        <! Add new item. >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">                
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="Create">
+                        <img src="~/icon/addsvg.svg" />
+                        <span class="text-capitalize text-decoration-underline">Add new</span>
+                    </a>
+                </li>
 
-<! Searching box.>
-<form asp-page="./Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-            <a asp-page="./Index"> Back to full List</a>
-        </p>
+                <li class="nav-item">
+                    <a class="nav-link text-capitalize text-decoration-underline"
+                       asp-page="./Index">
+                        <img src="~/icon/backfullsag.svg" />
+                        Back
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>            
+    
+    <! Searching box and summit button.>
+
+    <form class="d-flex" role="search"
+          asp-page="./Index" method="get">
+
+        <input class="kz-SearchBox-Left"
+               type="text"
+               name="SearchString"
+               value="@Model.CurrentFilter"
+               placeholder="Find by name" />
+
+        <input type="image" alt="Submit"
+               src="~/icon/searchsvg.svg"
+               class="btn btn-outline-primary kz-SearchBox-Right" />
+    </form>
+    <div>
     </div>
-</form>
+</nav>
 
 <table class="table">
     <thead>
         <tr>
             <! 'a' tag is used to get a link element resposing click.>
-            <th> 
+            <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Students[0].LastName)
@@ -48,25 +75,37 @@
         </tr>
     </thead>
 
-
     <tbody>
-    @foreach (var item in Model.Students) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstMidName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>}
+        @foreach (var item in Model.Students)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstMidName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+
+                <! Function column ======> 
+                <td align="right">
+                    <a class="text-decoration-none"
+                   asp-page="./Edit" asp-route-id="@item.ID ">
+                        <img src="~/icon/editsvg.svg" /> &nbsp
+                    </a>
+
+                    <a class="text-decoration-none"
+                   asp-page="./Details" asp-route-id="@item.ID">
+                        <img src="~/icon/detailsvg.svg" /> &nbsp
+                    </a>
+
+                    <a asp-page="./Delete" asp-route-id="@item.ID">
+                        <img src="~/icon/deletesvg.svg" />
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
@@ -75,17 +114,19 @@
     var nextDisabled = !Model.Students.HasNextPage ? "disabled" : "";
 }
 
+<! page moving >
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Students.PageIndex - 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @prevDisabled">
+   class="btn btn-primary btn-sm @prevDisabled ">
     Previous
 </a>
+
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Students.PageIndex + 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @nextDisabled">
+   class="btn btn-primary btn-sm @nextDisabled">
     Next
 </a>

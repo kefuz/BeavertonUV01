@@ -9,37 +9,137 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeavertonUV.styles.css" asp-append-version="true" />
 </head>
+
+<style>
+     /* hovor effects ------------*/          
+    [ID=menuBar]>li:is(:hover){background-color:yellowgreen}
+
+    @{
+      /* Get active page info from url */
+      string _navIndex = 
+        "nav_" + 
+        @Url.RouteUrl(ViewContext.RouteData.Values)
+        .Split("/")[1]
+        .ToUpper();
+     } 
+
+      /* Set up active css class. */
+     [ID=@_navIndex]{
+        border-bottom: 1px solid #dee2e6;       /* class: border-botton  */
+        border-color:  #0d6efd;                 /* class: border-primary */
+        border-width:  3px;                     /* class: border-3       */
+        font-weight:   700;                     /* class: fw-bold        */    
+     }
+
+     .kz-SearchBox-Left{
+        border-bottom-left-radius: 15px;
+        border-top-left-radius: 15px;
+        text-indent: 15px;
+        border-right: hidden;
+        border-color:blue;
+        border-width:thin;
+     }
+
+     .kz-SearchBox-Right{
+        border-top-right-radius: 15px;
+        border-bottom-right-radius:15px;
+        border-left:hidden;
+     }
+  />
+
+
+</style>
+
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm 
+                    navbar-toggleable-sm 
+                    navbar-light bg-light 
+                    box-shadow mb-3">
+
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Beaverton University</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <a class="navbar-brand" asp-area="" asp-page="/Index"                                  >
+                    <img border="0" alt="BUV" width="30" height="30" src="~/icon/unversity.png">         
+				     BeavertonU |
+                </a>                        
+
+                <! navbar collapse button >
+                <button class="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#kzNavbar" 
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">                        
+                <! End --->
+
+                <! Navbar --->
+                <div id="kzNavbar" 
+                    class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                     
+                    <ul class="navbar-nav flex-grow-1 bg-light">                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
+                            <a id="nav_ABOUT"
+                               class="nav-link text-dark" 
+                               asp-area="" asp-page="/About">
+                               <img alt="About" width="20" height="20" src="~/icon/aboutsvg.svg">
+                                About
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Students/Index">Students</a>
+                            <a id="nav_STUDENTS"
+                               class="nav-link text-dark nav-Active-Students "
+                               asp-area="" asp-page="/Students/Index">
+                               <img alt="Students" width="20" height="20" 
+                               src="~/icon/studentSvg.svg"> Students
+                           </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Courses/Index">Courses</a>
+                            <a id="nav_COURSES"
+                              class="nav-link text-dark" 
+                              asp-area="" asp-page="/Courses/Index">
+                              <img width="20" height="20" 
+                                   src="~/icon/courseSvg.svg"> Courses
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Instructors/Index">Instructors</a>
+                            <a id="nav_INSTRUCTORS"
+                               class="nav-link text-dark" 
+                               asp-area="" asp-page="/Instructors/Index">
+                               <img width="20" height="20" 
+                                    src="~/icon/instructorSvg.svg"> Instructors
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Departments/Index">Departments</a>
+                            <a id="nav_DEPARTMENTS"
+                               class="nav-link text-dark" 
+                               asp-area="" asp-page="/Departments/Index">
+                               <img width="20" height="20" 
+                                    src="~/icon/departmentSvg.svg"> Departments</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="nav_ENROLLMENTS"
+                               class="nav-link text-dark" 
+                               asp-area="" asp-page="/Enrollments/Index">
+                               <img width="20" height="20" 
+                                    src="~/icon/EnrollmentSvg.svg"> Enrollments</a>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -48,7 +148,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Beaverton University - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - Beaverton University - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
@@ -57,5 +157,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
